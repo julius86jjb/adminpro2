@@ -1,0 +1,33 @@
+#themecolors a {
+    cursor: pointer;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.w150 {
+    width: 150px;
+}
+
+.img-50 {
+    width: 50px;
+}
+
+.w70 {
+    width: 70px;
+}
+
+.azul-botones {
+    color: #118de7;
+}
+
+.rojo-icono {
+    color: red;
+}
+
+.mensaje-validacion {
+    float: right;
+    font-size: 12px;
+    margin-top: -15px;
+}

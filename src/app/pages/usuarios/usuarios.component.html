@@ -1,0 +1,77 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #buscador (keyup)="buscarUsuario(buscador.value)" type="text" class="form-control" placeholder="Buscar usuario">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row  animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando...</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+        </div>
+    </div>
+
+</div>
+
+<div class="row  animated fadeIn" *ngIf="!cargando">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h3 class="card-title">usuarios registrados ( <small>{{totalUsuarios}}</small> )</h3>
+                <table class="table  table-striped">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Email</th>
+                            <th>Nombre</th>
+                            <th>Rol</th>
+                            <th>Auth</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usuario of usuarios">
+                            <td class="w70">
+                                <img class="img-50 img-circle" [src]="usuario.img | imagen" alt="imagen de usuario">
+                            </td>
+                            <td>{{usuario.email}}</td>
+                            <td>{{usuario.nombre}}</td>
+                            <td>{{usuario.rol}}</td>
+                            <td>
+                                <label *ngIf="usuario.google" class="label label-danger mr-1">Google</label>
+                                <label *ngIf="!usuario.google" class="label label-primary">Normal</label>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary mr-1">
+                                    <i class="fa fa-save"></i>
+                                </button>
+
+                                <button (click)="borrarUsuario(usuario )" class="btn btn-danger">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button (click)="cambiarDesde(-5)" class="btn btn-secondary mr-1 ">
+                    Anterior
+                </button>
+
+                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                    Siguiente
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
