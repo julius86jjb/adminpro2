@@ -21,13 +21,15 @@
                     </div>
                 </div>
 
-
-                <div align="right" class="mensaje-validacion" *ngIf="forma.get('email').errors && forma.get('email').errors.emailTaken">
-                    <i class="fa fa-exclamation-circle rojo-icono " aria-hidden="true"></i> Email ya registrado! <span class="azul-botones"></span><a routerLink="/login"><b>Inicia Sesión</b></a>
+                <div class="form-group" *ngIf="forma.get('email').errors && !!forma.get('email').errors.emailTaken">
+                    <div align="right" class="mensaje-validacion">
+                        <i class="fa fa-exclamation-circle rojo-icono " aria-hidden="true"></i> Email ya registrado! <span class="azul-botones"></span><a routerLink="/login"><b>Inicia Sesión</b></a>
+                    </div>
                 </div>
-
-                <div align="right" class="mensaje-validacion" *ngIf="forma.get('email').errors && forma.get('email').errors.pattern">
-                    <i class="fa fa-exclamation-circle rojo-icono " aria-hidden="true"></i> Formato de email incorrecto!
+                <div class="form-group " *ngIf="forma.controls['email'].errors && !!forma.controls.email.errors.pattern">
+                    <div align="right" class="mensaje-validacion">
+                        <i class="fa fa-exclamation-circle rojo-icono " aria-hidden="true"></i> Formato de email incorrecto!
+                    </div>
                 </div>
 
 
@@ -42,6 +44,18 @@
                         <input formControlName="password" name="password" class="form-control" type="password" required placeholder="Contraseña">
                     </div>
                 </div>
+                <div class="form-group" *ngIf="forma.get('password').errors && !!forma.get('password').errors.minlength">
+                    <div align="right" class="mensaje-validacion">
+                        <i class="fa fa-exclamation-circle rojo-icono " aria-hidden="true"></i> La constraseña debe tener al menos 6 carácteres!
+                    </div>
+                </div>
+                <div class="form-group" *ngIf="forma.get('password').errors && !!forma.get('password').errors.maxlength">
+                    <div align="right" class="mensaje-validacion">
+                        <i class="fa fa-exclamation-circle rojo-icono " aria-hidden="true"></i> La constraseña debe tener como máximo 20 carácteres!
+                    </div>
+                </div>
+
+
 
                 <div class="form-group ">
                     <div class="col-xs-12">
@@ -50,9 +64,10 @@
                 </div>
 
 
-
-                <div align="right" class="mensaje-validacion" *ngIf="!forma.controls.password2.pristine && forma.errors?.sonIguales">
-                    <i class="fa fa-exclamation-circle rojo-icono " aria-hidden="true"></i> Las constraseñas no coinciden
+                <div class="form-group" *ngIf="!forma.controls.password2.pristine && !!forma.errors?.sonIguales">
+                    <div align="right" class="mensaje-validacion">
+                        <i class="fa fa-exclamation-circle rojo-icono " aria-hidden="true"></i> Las constraseñas no coinciden
+                    </div>
                 </div>
                 <br>
                 <div class="form-group row">

@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
             );
         }
 
-    
+
 
     ngOnInit() {
         init_plugins();
@@ -57,13 +57,12 @@ export class RegisterComponent implements OnInit {
         this.forma = new FormGroup({
             nombre: new FormControl(null, Validators.required ), // par1:valor por defecto, par2: validaciones
             email: new FormControl(null, [
-                Validators.required, 
-                Validators.email,  
-                Validators.minLength(6), 
-                Validators.maxLength(30),
+                Validators.required,
+                Validators.email,
+
                 Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')
             ], this.validateEmailNotTaken.bind(this) ),
-            password: new FormControl(null, Validators.required),
+            password: new FormControl(null, [Validators.required,  Validators.minLength(6), Validators.maxLength(30)]),
             password2: new FormControl(null, Validators.required),
             condiciones: new FormControl(false)
         }, { validators: [ this.sonIguales('password', 'password2')]}

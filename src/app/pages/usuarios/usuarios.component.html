@@ -41,17 +41,22 @@
                     <tbody>
                         <tr *ngFor="let usuario of usuarios">
                             <td class="w70">
-                                <img class="img-50 img-circle" [src]="usuario.img | imagen" alt="imagen de usuario">
+                                <img (click)="mostrarModal(usuario._id)" class="img-50 img-circle pointer" [src]="usuario.img | imagen" alt="imagen de usuario">
                             </td>
                             <td>{{usuario.email}}</td>
                             <td>{{usuario.nombre}}</td>
-                            <td>{{usuario.rol}}</td>
+                            <td>
+                                <select name="rol" id="" class="form-control" [(ngModel)]="usuario.role">
+                                    <option value="ADMIN_ROLE">ADMIN_ROLE</option>
+                                    <option value="USER_ROLE">USER_ROLE</option>
+                                </select>
+                            </td>
                             <td>
                                 <label *ngIf="usuario.google" class="label label-danger mr-1">Google</label>
                                 <label *ngIf="!usuario.google" class="label label-primary">Normal</label>
                             </td>
                             <td>
-                                <button class="btn btn-primary mr-1">
+                                <button (click)="guardarUsuario( usuario )" class="btn btn-primary mr-1">
                                     <i class="fa fa-save"></i>
                                 </button>
 
@@ -63,11 +68,11 @@
                     </tbody>
                 </table>
 
-                <button (click)="cambiarDesde(-5)" class="btn btn-secondary mr-1 ">
+                <button (click)="cambiarDesde(-10)" class="btn btn-secondary mr-1 ">
                     Anterior
                 </button>
 
-                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                <button (click)="cambiarDesde(10)" class="btn btn-secondary">
                     Siguiente
                 </button>
 

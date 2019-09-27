@@ -8,6 +8,7 @@ import swal from 'sweetalert';
 import { map } from 'rxjs/internal/operators/map';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
+import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,17 @@ export class UsuarioService {
 
     constructor(public http: HttpClient,
                  public router: Router,
-                 public _subirArchivoService: SubirArchivoService
+                 public _subirArchivoService: SubirArchivoService,
+                 public _modalUploadService: ModalUploadService
     ) {
         this.cargarStorage();
+        this._modalUploadService.notificacion
+            .subscribe(resp => {
+                if ( this.usuario._id === resp.usuario._id) {
+                    console.log('entra en service');
+                    this.guardarStorage(this.usuario._id, this.token, resp.usuario);
+                }
+            });
     }
 
     estaLogueado() {
@@ -46,6 +55,7 @@ export class UsuarioService {
 
         this.usuario = usuario;
         this.token = token;
+        console.log(this.usuario);
 
     }
 
@@ -105,16 +115,18 @@ export class UsuarioService {
     }
 
     actualizarUsuario(usuario: Usuario) {
-
+        console.log(usuario);
         let url = URL_SERVICIOS + '/usuario/' + usuario._id;
 
         url += '?token=' + this.token;
         return this.http.put(url, usuario)
             .pipe(
                 map( (resp: any) => {
-                    // console.log(resp);
-                    const usuarioDB: Usuario = resp.usuario;
-                    this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
+                    console.log(resp.usuario);
+                    if (usuario._id === this.usuario._id) {
+                        const usuarioDB: Usuario = resp.usuario;
+                        this.guardarStorage(usuarioDB._id, this.token, usuarioDB);
+                    }
 
                     swal('Usuario actualizado', usuario.nombre, 'success');
 
@@ -152,8 +164,8 @@ export class UsuarioService {
                 map(users => users.filter(user => user.email === email)),
                 map(users => {
                     console.log(!users.length);
-                    return !users.length
-                }) 
+                    return !users.length;
+                })
             );
       }
 

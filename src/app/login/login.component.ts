@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { UsuarioService } from '../services/service.index';
 import { Usuario } from '../models/usuario.model';
+import swal from 'sweetalert';
 
 declare function init_plugins();
 declare const  gapi: any;
@@ -68,7 +69,13 @@ export class LoginComponent implements OnInit {
         const usuario = new Usuario (null, forma.value.email, forma.value.password);
 
         this._usuarioService.login(usuario, forma.value.recuerdame)
-            .subscribe( loginOk => this.router.navigate(['/dashboard']));
+            .subscribe( loginOk => {
+                this.router.navigate(['/dashboard']);
+            },
+            (err) => {
+                console.log(err);
+                swal('Error', err.error.mensaje, 'warning');
+            });
     }
 
 }
