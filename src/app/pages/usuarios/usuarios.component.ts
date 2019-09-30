@@ -98,7 +98,7 @@ export class UsuariosComponent implements OnInit {
                     .subscribe( resp => {
                         this.totalUsuarios--;
                          if (this.desde === this.totalUsuarios) {
-                             this.desde -= 5;
+                             this.desde -= 10;
                          }
                         this.cargarUsuarios();
                     });

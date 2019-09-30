@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit {
             .subscribe((resp: any) => {
 
                 if ( resp.usuario._id === this._usuarioService.usuario._id) {
-                    
+
                     this.usuario = this._usuarioService.usuario;
                 }
             });

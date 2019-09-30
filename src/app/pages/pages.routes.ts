@@ -10,6 +10,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuardGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { HospitalesComponent } from './hospitales/hospitales.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { MedicoComponent } from './medicos/medico.component';
 
 
 
@@ -27,6 +30,10 @@ const PagesRoutes: Routes = [
             { path: 'account-settings', component: AccountSettingsComponent,  data : {titulo: 'Ajustes del Tema'} },
             { path: 'perfil', component: ProfileComponent,  data : {titulo: 'Perfil de usuario'} },
             { path: 'usuarios', component: UsuariosComponent,  data : {titulo: 'Usuarios'} },
+            { path: 'hospitales', component: HospitalesComponent,  data : {titulo: 'Hospitales'} },
+            { path: 'medicos', component: MedicosComponent,  data : {titulo: 'Medicos'} },
+            // sirve tanto para crear medicos como para actualizar
+            { path: 'medico/:id', component: MedicoComponent,  data : {titulo: 'Actualizar Medico'} },
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     },

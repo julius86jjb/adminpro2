@@ -3,7 +3,8 @@
         <div class="card">
             <div class="card-body">
 
-                <input #buscador (keyup)="buscarUsuario(buscador.value)" type="text" class="form-control" placeholder="Buscar usuario">
+                <input #buscador (keyup)="buscarHospital(buscador.value)" type="text" class="form-control" placeholder="Buscar hospital">
+
             </div>
         </div>
     </div>
@@ -18,49 +19,46 @@
             <i class="fa fa-refresh fa-spin fa-2x"></i>
         </div>
     </div>
-
 </div>
 
-<div class="row  animated fadeIn" *ngIf="!cargando">
-    <div class="col-sm-12">
+
+<div class="row">
+    <div class="col-12">
         <div class="card">
             <div class="card-body">
 
-                <h3 class="card-title">usuarios registrados ( <small>{{totalUsuarios}}</small> )</h3>
+                <div class="text-right">
+                    <button (click)="crearHospital()" type="button" class="btn waves-effect waves-light btn-rounded btn-outline-primary">
+                        <i class="fa fa-plus"></i>
+                        Crear Hospital
+                    </button>
+                </div>
+
+                <h3 class="card-title">Hospitales registrados ( <small>{{totalHospitales}}</small> )</h3>
                 <table class="table  table-striped">
                     <thead>
                         <tr>
                             <th>Imagen</th>
-                            <th>Email</th>
-                            <th>Nombre</th>
-                            <th>Rol</th>
-                            <th>Auth</th>
+                            <th>Hospital</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let usuario of usuarios">
+                        <tr *ngFor="let hospital of hospitales">
                             <td class="w70">
-                                <img (click)="mostrarModal(usuario._id)" class="img-50  pointer" [src]="usuario.img | imagen" alt="imagen de usuario">
-                            </td>
-                            <td>{{usuario.email}}</td>
-                            <td>{{usuario.nombre}}</td>
-                            <td>
-                                <select name="rol" id="" class="form-control" [(ngModel)]="usuario.role">
-                                    <option value="ADMIN_ROLE">ADMIN_ROLE</option>
-                                    <option value="USER_ROLE">USER_ROLE</option>
-                                </select>
+                                <img (click)="actualizarImagen( hospital )" class="img-50 pointer" [src]="hospital.img | imagen:'hospital'" alt="imagen de hospital">
+                                <!-- (click)="mostrarModal(hospital._id)" -->
                             </td>
                             <td>
-                                <label *ngIf="usuario.google" class="label label-danger mr-1">Google</label>
-                                <label *ngIf="!usuario.google" class="label label-primary">Normal</label>
+                                <input [(ngModel)]="hospital.nombre" type="text" name="nombre" class="form-control" placeholder="nombre del hospital">
                             </td>
+
                             <td>
-                                <button (click)="guardarUsuario( usuario )" class="btn btn-primary mr-1">
+                                <button (click)="guardarHospital( hospital )" class="btn btn-primary mr-1">
                                     <i class="fa fa-save"></i>
                                 </button>
 
-                                <button (click)="borrarUsuario(usuario )" class="btn btn-danger">
+                                <button (click)="borrarHospital( hospital )" class="btn btn-danger">
                                     <i class="fa fa-trash-o"></i>
                                 </button>
                             </td>
