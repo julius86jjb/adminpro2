@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/service.index';
 import { Usuario } from '../../models/usuario.model';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,8 @@ export class HeaderComponent implements OnInit {
 
     constructor(
         public _usuarioService: UsuarioService,
-        public _modalUploadService: ModalUploadService
+        public _modalUploadService: ModalUploadService,
+        public router: Router
         ) { }
 
     ngOnInit() {
@@ -27,6 +29,10 @@ export class HeaderComponent implements OnInit {
                     this.usuario = this._usuarioService.usuario;
                 }
             });
+    }
+
+    buscar(termino: string) {
+        this.router.navigate(['/busqueda', termino]);
     }
 
 }

@@ -71,11 +71,11 @@ export class LoginComponent implements OnInit {
         this._usuarioService.login(usuario, forma.value.recuerdame)
             .subscribe( loginOk => {
                 this.router.navigate(['/dashboard']);
-            },
-            (err) => {
-                console.log(err);
-                swal('Error', err.error.mensaje, 'warning');
             });
+            // (err) => {
+            //     console.log(err);
+            //     swal('Error', err.error.mensaje, 'warning');
+            // }
     }
 
 }

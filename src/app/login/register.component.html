@@ -23,7 +23,7 @@
 
                 <div class="form-group" *ngIf="forma.get('email').errors && !!forma.get('email').errors.emailTaken">
                     <div align="right" class="mensaje-validacion">
-                        <i class="fa fa-exclamation-circle rojo-icono " aria-hidden="true"></i> Email ya registrado! <span class="azul-botones"></span><a routerLink="/login"><b>Inicia Sesión</b></a>
+                        <i class="fa fa-exclamation-circle rojo-icono " aria-hidden="true"></i> Email ya registrado!<a routerLink="/login"><b> Inicia Sesión</b></a>
                     </div>
                 </div>
                 <div class="form-group " *ngIf="forma.controls['email'].errors && !!forma.controls.email.errors.pattern">

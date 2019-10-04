@@ -7,12 +7,15 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
-import { LoginGuardGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { HospitalesComponent } from './hospitales/hospitales.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
+
+import { LoginGuardGuard } from '../services/service.index';
+import { AdminGuard } from '../services/service.index';
 
 
 
@@ -29,7 +32,14 @@ const PagesRoutes: Routes = [
             { path: 'rxjs', component: RxjsComponent,  data : {titulo: 'RxJs'} },
             { path: 'account-settings', component: AccountSettingsComponent,  data : {titulo: 'Ajustes del Tema'} },
             { path: 'perfil', component: ProfileComponent,  data : {titulo: 'Perfil de usuario'} },
-            { path: 'usuarios', component: UsuariosComponent,  data : {titulo: 'Usuarios'} },
+            { path: 'busqueda/:termino', component: BusquedaComponent,  data : {titulo: 'Buscador'} },
+            // mantenimiento
+            {
+                path: 'usuarios',
+                component: UsuariosComponent,
+                data : {titulo: 'Usuarios'},
+                canActivate: [AdminGuard]
+            },
             { path: 'hospitales', component: HospitalesComponent,  data : {titulo: 'Hospitales'} },
             { path: 'medicos', component: MedicosComponent,  data : {titulo: 'Medicos'} },
             // sirve tanto para crear medicos como para actualizar
